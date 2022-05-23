@@ -1,37 +1,34 @@
-import { Table, Tag } from "antd"
-import { Website } from "../../App"
+import React from 'react';
+import { Table, Tag } from 'antd';
+import { Website } from '../../App';
 
 function Header() {
-  return (
-    <h2>常用网站</h2>
-  )
+  return <h2>常用网站</h2>;
 }
 function Footer() {
-  return (
-    <Tag color={'red'}>dev</Tag>
-  )
+  return <Tag color={'red'}>dev</Tag>;
 }
 export default function Marks(props: any) {
   const markList: Website[] = props.markList;
   const colums = [
     {
-      title: "Name",
+      title: 'Name',
       dataIndex: 'name',
-      key: "name"
+      key: 'name'
     },
     {
-      title: "Tag",
+      title: 'Tag',
       dataIndex: 'tag',
-      key: "tag",
+      key: 'tag',
       render: (text: string) => <Tag>{text}</Tag>
     },
     {
-      title: "URL",
+      title: 'URL',
       dataIndex: 'url',
-      key: "url",
-      render: (text: string) => < a href={text} > {text}</a >,
+      key: 'url',
+      render: (text: string) => <a href={text}> {text}</a>
     }
-  ]
+  ];
   return (
     <Table
       bordered
@@ -40,5 +37,5 @@ export default function Marks(props: any) {
       size="small"
       pagination={false}
     />
-  )
+  );
 }

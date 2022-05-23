@@ -1,11 +1,10 @@
-import { Card } from "antd"
+import React from 'react';
+import { Card } from 'antd';
 
 export default function Dida() {
   return (
     <Card
       title="滴答代办"
-      extra={<a href='https://www.dida365.com/'>查看更多</a>}
-    >
-    </Card>
-  )
+      extra={<a href="https://www.dida365.com/">查看更多</a>}></Card>
+  );
 }
