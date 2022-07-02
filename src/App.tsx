@@ -1,50 +1,17 @@
-import React from 'react';
-import './components/Marks';
-import './components/Dida';
-import { useState, useEffect } from 'react';
-import Marks from './components/Marks';
-import Dida from './components/Dida';
-import { Button, Divider, Layout, Space } from 'antd';
-import axios from 'axios';
+import { useEffect } from "react";
+import { Layout } from "antd";
+// import { TagType, Website } from "@types";
+import MainField from "@components/MainField";
+import BTHeader from "@components/BTHeader";
+import { Store } from "@store";
+import "./App.css";
 
-const { Header, Footer, Content } = Layout;
-export type Website = {
-  name: string;
-  url: string;
-  tag: string;
-};
-export type TagType = {
-  name: string;
-  index: number;
-  pinned: boolean;
-};
-export const host = import.meta.env.VITE_APP_HOST;
-
-function ToolBar(props: any) {
-  function getSync() {
-    axios.get(host + '/api/btab/getMarkList').then((res) => {
-      props.setMarkList(res.data);
-      window.localStorage.setItem('BTAB_MARKLIST', JSON.stringify(res.data));
-      props.creatTagList(res.data);
-    });
-  }
-  return (
-    <Space>
-      <Button danger disabled>
-        回收所有标签
-      </Button>
-      <Button disabled>导出</Button>
-      <Button type="primary" onClick={() => getSync()}>
-        同步
-      </Button>
-    </Space>
-  );
-}
+const { Footer, Content } = Layout;
 
 export default function App() {
-  const [markList, setMarkList] = useState();
+  const { setCollectionList } = Store.useContainer();
+  /*
   const [tagList, setTagList] = useState<TagType[]>([]);
-
   function addTag(tag: string) {
     console.log(tag);
     setTagList((state) => {
@@ -67,44 +34,24 @@ export default function App() {
       }
     });
     console.log(tagList);
-  }
+  } */
 
   useEffect(() => {
-    let str = window.localStorage.getItem('BTAB_MARKLIST');
+    const str = window.localStorage.getItem("BTAB_MARKLIST");
     if (str != null) {
-      let tmp = JSON.parse(str);
-      setMarkList(tmp);
+      const tmp = JSON.parse(str);
+      setCollectionList(tmp);
     }
   }, []);
 
   return (
-    <>
-      <Layout>
-        <Header>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center'
-            }}>
-            <span>Brick Tab</span>
-            <ToolBar
-              markList={markList}
-              setMarkList={setMarkList}
-              addTag={addTag}
-              creatTagList={creatTagList}></ToolBar>
-          </div>
-        </Header>
+    <Layout>
+      <BTHeader />
+      <Content className="content">
+        <MainField />
+      </Content>
 
-        <Content>
-          <Divider orientation="left">New Tab</Divider>
-          <Marks markList={markList} setMarkList={setMarkList} />
-          <Divider orientation="left">Hello Dida365</Divider>
-          <Dida />
-        </Content>
-
-        <Footer>Copyright by SummersDay</Footer>
-      </Layout>
-    </>
+      <Footer>Copyright by SummersDay @ {new Date().getFullYear()}</Footer>
+    </Layout>
   );
 }
