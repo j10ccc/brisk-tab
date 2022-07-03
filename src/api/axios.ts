@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const host = import.meta.env.VITE_APP_HOST;
+const host = import.meta.env.VITE_APP_HOST;
 
 export function myAxios(axiosConfig: any) {
   const service = axios.create({

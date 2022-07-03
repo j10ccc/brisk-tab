@@ -18,7 +18,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
-      "@utils/*": ["src/utils/*"],
+      "@utils": ["src/utils/index.ts"],
       "@types": ["src/types/index.ts"],
       "@store": ["src/store/index.ts"],
       "@api/*": ["src/api/*"]

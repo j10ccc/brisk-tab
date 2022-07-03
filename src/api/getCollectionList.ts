@@ -1,7 +1,8 @@
 import { myAxios } from "./axios";
 
-export function getCollectionListAPI(paramsList?: any) {
+export function getCollectionListAPI(baseURL: string) {
   return myAxios({
+    baseURL,
     url: "/api/getCollectionList",
     method: "get"
   });

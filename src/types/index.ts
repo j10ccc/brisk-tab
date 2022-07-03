@@ -17,4 +17,5 @@ export type Collection = {
 
 export type UserConfigType = {
   collectionPreviewMaxLength: number;
+  collectionSyncHost: string;
 };
