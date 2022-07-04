@@ -27,6 +27,9 @@ export default function MainField() {
         <Space>
           <Button disabled>导出</Button>
           <Button type="primary" onClick={getSync}>
+            添加
+          </Button>
+          <Button type="dashed" onClick={getSync}>
             同步
           </Button>
         </Space>
