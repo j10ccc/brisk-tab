@@ -15,13 +15,17 @@ const initialThemeList = [
 ];
 
 function useStore() {
+  // localstorage
   const [collectionList, setCollectionList] = useLocalStorageState<
     Collection[] | undefined
   >("BTAB_COLLECTIONLIST");
 
-  const [userConfig, setUserConfig] =
-    useState<UserConfigType>(initialUserConfig);
+  const [userConfig, setUserConfig] = useLocalStorageState<UserConfigType>(
+    "BTAB_USERCONFIG",
+    { defaultValue: initialUserConfig }
+  );
 
+  // temporary state
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [themeList, setThemeList] = useState(initialThemeList);
 

@@ -1,51 +1,61 @@
-import {
-  Form,
-  Drawer,
-  Input,
-  Button,
-  Card,
-  Radio,
-  RadioChangeEvent
-} from "antd";
+import { Form, Drawer, Input, Button, Card, Radio } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { Store } from "@store";
 
 function CollectionSetting() {
-  const { collectionSyncHost } = Store.useContainer().userConfig;
-  return (
-    <Form layout="vertical">
-      <Form.Item label="同步地址" name="collectionSyncHost">
-        <Input
-          placeholder="http://example.com"
-          defaultValue={collectionSyncHost}
-        />
-      </Form.Item>
-    </Form>
-  );
-}
+  const { userConfig, setUserConfig } = Store.useContainer();
+  const { collectionSyncHost } = userConfig;
+  const [form] = Form.useForm();
 
-function ThemeSetting() {
-  const { themeList, userConfig, setUserConfig } = Store.useContainer();
-  const { theme } = userConfig;
-
-  function toggleTheme({ target: { value } }: RadioChangeEvent) {
-    setUserConfig({ ...userConfig, theme: value });
+  function onSave() {
+    setUserConfig({
+      ...userConfig,
+      ...form.getFieldsValue().filter((item: any) => item)
+    });
   }
 
   return (
-    <Form layout="vertical">
-      <Form.Item label="默认" name="theme">
-        <Radio.Group
-          options={themeList}
-          onChange={toggleTheme}
-          defaultValue={theme}
-          optionType="button"
-        />
-      </Form.Item>
-    </Form>
+    <Card
+      size="small"
+      type="inner"
+      title="收藏夹"
+      extra={
+        <Button type="link" onClick={onSave}>
+          保存
+        </Button>
+      }>
+      <Form layout="vertical" form={form}>
+        <Form.Item label="同步地址" name="collectionSyncHost">
+          <Input
+            placeholder="http://example.com"
+            defaultValue={collectionSyncHost}
+          />
+        </Form.Item>
+      </Form>
+    </Card>
   );
 }
-
+function ThemeSetting() {
+  const { theme } = Store.useContainer().userConfig;
+  const { themeList } = Store.useContainer();
+  return (
+    <Card
+      size="small"
+      type="inner"
+      title="主题"
+      extra={<Button type="link">保存</Button>}>
+      <Form layout="horizontal">
+        <Form.Item label="模式选择" name="themeType">
+          <Radio.Group
+            options={themeList}
+            defaultValue={theme}
+            optionType="button"
+          />
+        </Form.Item>
+      </Form>
+    </Card>
+  );
+}
 export default function BTDrawer() {
   const { isDrawerVisible, setIsDrawerVisible } = Store.useContainer();
   return (
@@ -55,17 +65,8 @@ export default function BTDrawer() {
       onClose={() => {
         setIsDrawerVisible(false);
       }}>
-      <Card
-        size="small"
-        type="inner"
-        title="收藏夹"
-        bordered={false}
-        extra={<Button type="link">保存</Button>}>
-        <CollectionSetting />
-      </Card>
-      <Card size="small" type="inner" title="主题" bordered={false}>
-        <ThemeSetting />
-      </Card>
+      <CollectionSetting />
+      <ThemeSetting />
     </Drawer>
   );
 }
