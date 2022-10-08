@@ -1,5 +1,4 @@
 import { Button, Layout, message, Space } from "antd";
-import { getCollectionListAPI } from "@api/getCollectionList";
 import { Store } from "@store";
 import { useState } from "react";
 
@@ -8,14 +7,15 @@ import "./index.css";
 const { Header } = Layout;
 
 function ToolBar() {
-  const { setCollectionList } = Store.useContainer();
-  const [counter, setCounter] = useState(1);
+  const { setCollectionList, setIsDrawerVisible } = Store.useContainer();
 
   function removeCache() {
     setCollectionList(undefined);
   }
 
-  function onSetting() {}
+  function showSetting() {
+    setIsDrawerVisible(true);
+  }
 
   return (
     <Space>
@@ -25,7 +25,7 @@ function ToolBar() {
       <Button type="primary" danger onClick={removeCache}>
         清除本地缓存
       </Button>
-      <Button onClick={onSetting}>设置</Button>
+      <Button onClick={showSetting}>设置</Button>
     </Space>
   );
 }
