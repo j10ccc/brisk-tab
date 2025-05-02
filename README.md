@@ -1,4 +1,7 @@
-# Brisk Tab
+# [WIP] Brisk Tab
+
+> [!WARNING]
+> WIP FOR NEW BEGINNING.
 
 超级迷你的新标签页，整合了一些有用的功能
 
