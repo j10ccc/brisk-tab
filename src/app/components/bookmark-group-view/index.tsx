@@ -1,4 +1,5 @@
-import { BookmarkGroup } from "../../types";
+import { BookmarkGroup } from "@/app/types";
+
 import BookmarkItemView from "../bookmark-item-view";
 
 interface BookmarkGroupProps {

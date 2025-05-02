@@ -1,4 +1,5 @@
-import { Bookmark } from "../../types";
+import { Bookmark } from "@/app/types";
+
 import styles from "./index.module.css";
 
 type BookmarkItemProps = {
