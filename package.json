@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpx lint-staged"
   },
   "dependencies": {
     "jotai": "^2.12.3",
@@ -33,6 +37,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "prettier": "^3.5.3",
+    "simple-git-hooks": "^2.13.0",
     "typescript": "^5",
     "unocss": "66.1.0-beta.13"
   }
