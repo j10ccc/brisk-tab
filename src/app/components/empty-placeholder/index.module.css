@@ -1,0 +1,24 @@
+.container {
+  @apply flex items-center justify-center flex-auto;
+  @apply opacity-50;
+}
+
+.contentContainer {
+  @apply flex -translate-y-20 items-center;
+}
+
+.icon {
+  @apply text-12;
+}
+
+.divider {
+  @apply i-fluent-divider-short-20-regular text-10 opacity-30;
+}
+
+.title {
+  @apply text-xl font-200;
+}
+
+.desc {
+  @apply font-medium opacity-60;
+}

@@ -1,15 +1,19 @@
-import PackageJSON from "../../../../package.json";
+import PackageJSON from "packageJSON";
+
+import HeaderOperation from "../header-operation";
+import styles from "./index.module.css";
 
 export default function LayoutHeader() {
   return (
-    <header className="w-full py-4 px-6 select-none flex">
-      <div className="leading-tight hover:text-brand-primary transition-colors">
-        <div className="font-100">SummersDay</div>
+    <header className={styles.container}>
+      <div className={styles.brand}>
+        <h2>SummersDay</h2>
         <div>
           <span>Brisk Tab</span>
-          <span className="ml-2 text-3 opacity-50">v{PackageJSON.version}</span>
+          <span className={styles.version}>v{PackageJSON.version}</span>
         </div>
       </div>
+      <HeaderOperation />
     </header>
   );
 }

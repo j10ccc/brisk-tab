@@ -16,6 +16,8 @@ export default defineConfig({
     }
   },
   shortcuts: {
-    "text-cut": "text-ellipsis overflow-hidden whitespace-nowrap"
+    "text-cut": "text-ellipsis overflow-hidden whitespace-nowrap",
+    "brand-btn":
+      "rounded-sm cursor-pointer p-2 hover:text-brand-primary hover:bg-brand-secondary"
   }
 });
