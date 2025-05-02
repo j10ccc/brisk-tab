@@ -17,8 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-[#f9fafa] text-gray-9">
-        <LayoutHeader />
-        <main>{children}</main>
+        <section className="flex flex-col h-screen">
+          <LayoutHeader />
+          <main className="flex-1 overflow-hidden">{children}</main>
+        </section>
       </body>
     </html>
   );
