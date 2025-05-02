@@ -1,0 +1,22 @@
+.container {
+  @apply flex items-center gap-2 w-45 overflow-hidden px-3 py-2;
+  @apply hover:text-brand-primary hover:bg-brand-secondary;
+  @apply transition-colors cursor-pointer rounded-sm relative;
+
+  .favicon {
+    @apply size-[16px] rounded-sm;
+  }
+
+  .name {
+    @apply w-full text-sm text-cut;
+  }
+
+  .forward {
+    @apply hidden right-0 absolute p-2;
+    background: linear-gradient(to right, transparent, rgb(241, 245, 244)) 60%;
+  }
+
+  &:hover .forward {
+    @apply inline;
+  }
+}
