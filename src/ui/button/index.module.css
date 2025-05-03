@@ -1,0 +1,26 @@
+.container {
+  @apply py-1 px-3 rounded-sm;
+  @apply border-1 transition-all;
+  @apply text-sm;
+}
+
+.icon {
+  @apply mr-2;
+}
+
+.filled {
+  @apply text-brand-primary bg-brand-secondary;
+  @apply hover:text-brand-primary hover:bg-brand-secondary hover:brightness-95;
+}
+
+.default {
+  @apply text-gray-6;
+  @apply hover:bg-brand-secondary hover:text-brand-primary;
+}
+
+.primary {
+  @apply bg-brand-primary text-white;
+  @apply border-brand-primary;
+  @apply ring-brand-secondary;
+  @apply hover:ring-2 hover:ring-brand-primary/[50%];
+}
