@@ -1,4 +1,4 @@
-import { Bookmark } from "../types";
+import { UngroupedBookmark } from "../types";
 
 /**
  * Converts a chrome bookmark to a bookmark flatly
@@ -6,7 +6,9 @@ import { Bookmark } from "../types";
  * @param content Text content of a chrome bookmark file
  * @returns
  */
-export default function convertChromeBookmark(content: string): Bookmark[] {
+export default function convertChromeBookmark(
+  content: string
+): UngroupedBookmark[] {
   const parser = new DOMParser();
   const document = parser.parseFromString(content, "text/html");
   const aTags = document.querySelectorAll("a");
