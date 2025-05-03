@@ -1,0 +1,32 @@
+.container {
+  @apply z-1000;
+  @apply flex justify-center items-center;
+  @apply fixed top-0 left-0 right-0 bottom-0;
+}
+
+.overlay {
+  @apply absolute w-screen h-screen;
+  @apply bg-black/50;
+}
+
+.content {
+  @apply relative p-lg shadow-sm rounded-md min-w-90 max-w-110;
+  @apply bg-brand-background;
+  @apply translate-y--20;
+}
+
+.header {
+  @apply flex justify-between items-end;
+
+  h1 {
+    @apply mb-sm;
+  }
+}
+
+.body {
+  @apply mb-lg;
+}
+
+.footer {
+  @apply flex justify-end;
+}
