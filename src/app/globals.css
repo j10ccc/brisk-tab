@@ -1,2 +1,10 @@
-@import "@unocss/reset/tailwind.css";
+@import "@unocss/reset/tailwind-compat.css";
 @unocss all;
+
+body {
+  @apply bg-brand-background text-gray-9;
+}
+
+::selection {
+  @apply bg-brand-primary/[20%];
+}

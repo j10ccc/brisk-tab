@@ -10,7 +10,7 @@
 }
 
 .content {
-  @apply relative p-lg shadow-sm rounded-md min-w-90 max-w-110;
+  @apply relative p-lg shadow-sm rounded-md w-110;
   @apply bg-brand-background;
   @apply translate-y--20;
 }
@@ -19,7 +19,7 @@
   @apply flex justify-between items-end;
 
   h1 {
-    @apply mb-sm;
+    @apply mb-2;
   }
 }
 

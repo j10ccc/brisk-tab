@@ -11,13 +11,15 @@ export default defineConfig({
     colors: {
       brand: {
         primary: "#617d71",
-        secondary: "#f1f5f4"
+        secondary: "#f1f5f4",
+        background: "#f9fafa"
       }
     }
   },
   shortcuts: {
     "text-cut": "text-ellipsis overflow-hidden whitespace-nowrap",
     "brand-btn":
-      "rounded-sm cursor-pointer p-2 hover:text-brand-primary hover:bg-brand-secondary"
+      "rounded-sm cursor-pointer p-2 hover:text-brand-primary hover:bg-brand-secondary",
+    "form-item": "focus:outline-none focus:ring-1 focus:ring-brand-primary"
   }
 });

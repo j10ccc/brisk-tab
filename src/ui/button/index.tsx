@@ -2,16 +2,21 @@ import { clsx } from "clsx";
 
 import styles from "./index.module.css";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "filled" | "default";
   children?: React.ReactNode;
   icon?: React.ReactNode;
   className?: string;
-  otherProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 export default function Button(props: ButtonProps) {
-  const { children, icon, className, otherProps, variant = "default" } = props;
+  const {
+    children,
+    icon,
+    className,
+    variant = "default",
+    ...otherProps
+  } = props;
   const buttonType = otherProps?.type ?? "button";
 
   return (

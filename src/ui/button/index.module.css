@@ -1,6 +1,6 @@
 .container {
   @apply py-1 px-3 rounded-sm;
-  @apply border-1 transition-all;
+  @apply border-1 bg-brand-background transition-all;
   @apply text-sm;
 }
 
