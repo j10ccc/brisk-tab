@@ -34,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
     "@unocss/postcss": "66.1.0-beta.13",
+    "@unocss/reset": "^66.1.0",
     "@zjutjh/eslint-config": "^0.7.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
