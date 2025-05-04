@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from "react";
 import useBookmarkGroups from "@/app/hooks/use-bookmark-groups";
 import useBookmarks from "@/app/hooks/use-bookmarks";
 import { UngroupedBookmark } from "@/app/types";
-import convertChromeBookmark from "@/app/utils/convert-chrome-bookmark";
+import convertNetscapeBookmark from "@/app/utils/convert-chrome-bookmark";
 import readLocalFile from "@/app/utils/read-local-file";
 import Button from "@/ui/button";
 import Input from "@/ui/input";
@@ -39,7 +39,7 @@ export default function ImportFromButton() {
     }
 
     const fileContent = await readLocalFile(file);
-    const res = convertChromeBookmark(fileContent);
+    const res = convertNetscapeBookmark(fileContent);
     setTargetBookmarks(res);
     setIsOpenModal(true);
     e.target.value = "";

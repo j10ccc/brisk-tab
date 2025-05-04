@@ -6,7 +6,7 @@ import { UngroupedBookmark } from "../types";
  * @param content Text content of a chrome bookmark file
  * @returns
  */
-export default function convertChromeBookmark(
+export default function convertNetscapeBookmark(
   content: string
 ): UngroupedBookmark[] {
   const parser = new DOMParser();
