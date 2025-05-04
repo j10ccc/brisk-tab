@@ -2,6 +2,7 @@
 
 import BookmarkGroupView from "./components/bookmark-group-view";
 import EmptyPlaceholder from "./components/empty-placeholder";
+import GlobalSearch from "./components/global-search";
 import useBookmarkGroups from "./hooks/use-bookmark-groups";
 import useBookmarks from "./hooks/use-bookmarks";
 
@@ -21,6 +22,7 @@ export default function Home() {
           <BookmarkGroupView key={group.name} group={group} />
         ))
       )}
+      <GlobalSearch />
     </section>
   );
 }
