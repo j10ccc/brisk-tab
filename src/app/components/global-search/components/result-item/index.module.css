@@ -1,0 +1,27 @@
+.container {
+  @apply flex flex-col;
+  @apply border-1 border-b-0;
+  @apply px-sm py-2 transition-colors padding-box;
+
+  @apply hover:text-brand-primary;
+
+  &:last-child {
+    @apply border-b-1;
+  }
+}
+
+.title-row {
+  @apply flex items-center justify-between;
+
+  .name {
+    @apply text-cut mb-1;
+  }
+
+  .group {
+    @apply text-sm op-60;
+  }
+}
+
+.url {
+  @apply text-sm op-60 text-cut;
+}

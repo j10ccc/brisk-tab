@@ -1,2 +1,17 @@
-@import "@unocss/reset/tailwind.css";
-@unocss all;
+@layer reset, base, utilities, components;
+
+@layer base {
+  @unocss preflights, default;
+}
+
+@layer utilities {
+  @unocss;
+}
+
+body {
+  @apply bg-brand-background text-gray-9;
+}
+
+::selection {
+  @apply bg-brand-primary/[20%];
+}

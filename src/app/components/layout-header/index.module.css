@@ -5,11 +5,11 @@
     @apply leading-tight hover:text-brand-primary transition-colors;
 
     h2 {
-      @apply font-100
+      @apply font-100;
     }
   }
 
   .version {
-    @apply ml-2 text-3 opacity-50
+    @apply ml-2 text-3 opacity-50;
   }
 }

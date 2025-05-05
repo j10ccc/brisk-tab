@@ -1,14 +1,24 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "brisk-tab",
+  "author": "SummersDay",
+  "version": "0.2.0",
   "private": true,
+  "packageManager": "pnpm@10.10.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpx lint-staged"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "jotai": "^2.12.3",
     "next": "15.3.1",
     "react": "^19.0.0",
@@ -24,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
     "@unocss/postcss": "66.1.0-beta.13",
+    "@unocss/reset": "^66.1.0",
     "@zjutjh/eslint-config": "^0.7.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
@@ -33,6 +44,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "prettier": "^3.5.3",
+    "simple-git-hooks": "^2.13.0",
     "typescript": "^5",
     "unocss": "66.1.0-beta.13"
   }
