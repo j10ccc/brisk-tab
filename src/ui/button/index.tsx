@@ -17,7 +17,7 @@ export default function Button(props: ButtonProps) {
     variant = "default",
     ...otherProps
   } = props;
-  const buttonType = otherProps?.type ?? "button";
+  const buttonType = otherProps.type ?? "button";
 
   return (
     <button
