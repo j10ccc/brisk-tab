@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { ReactElement } from "react";
 
 import BookmarkGroupView from "@/components/bookmark-group-view";
@@ -31,7 +32,15 @@ const HomePage: NextPageWithLayout = () => {
 };
 
 HomePage.getLayout = function getLayout(page: ReactElement) {
-  return <DefaultLayout>{page}</DefaultLayout>;
+  return (
+    <>
+      <Head>
+        <title>Brisk Tab</title>
+        <meta name="description" content="An alt blank page for your browser" />
+      </Head>
+      <DefaultLayout>{page}</DefaultLayout>
+    </>
+  );
 };
 
 export default HomePage;
