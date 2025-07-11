@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:crx": "CRX_BUILD=1 next build",
+    "build:crx": "CRX_BUILD=1 next build; jiti scripts/next-out-transform.ts",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "simple-git-hooks"
@@ -44,6 +44,8 @@
     "eslint-plugin-prettier": "^5.5.1",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
+    "glob": "^11.0.3",
+    "jiti": "^2.4.2",
     "prettier": "^3.6.2",
     "simple-git-hooks": "^2.13.0",
     "typescript": "^5.8.3",
