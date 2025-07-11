@@ -1,15 +1,13 @@
-import "./globals.css";
-
 import type { Metadata } from "next";
 
-import LayoutHeader from "./components/layout-header";
+import LayoutHeader from "@/components/layout-header";
 
 export const metadata: Metadata = {
   title: "Brisk Tab",
   description: "An alt blank page for your browser"
 };
 
-export default function RootLayout({
+export default function DefaultLayout({
   children
 }: Readonly<{
   children: React.ReactNode;

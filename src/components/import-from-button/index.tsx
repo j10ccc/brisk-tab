@@ -1,15 +1,15 @@
 "use client";
 import { ChangeEvent, useState } from "react";
 
-import useBookmarkGroups from "@/app/hooks/use-bookmark-groups";
-import useBookmarks from "@/app/hooks/use-bookmarks";
-import { UngroupedBookmark } from "@/app/types";
-import convertNetscapeBookmark from "@/app/utils/convert-chrome-bookmark";
-import readLocalFile from "@/app/utils/read-local-file";
+import useBookmarkGroups from "@/hooks/use-bookmark-groups";
+import useBookmarks from "@/hooks/use-bookmarks";
+import { UngroupedBookmark } from "@/types";
 import Button from "@/ui/button";
 import Input from "@/ui/input";
 import Modal from "@/ui/modal";
 import Select, { SelectOption } from "@/ui/select";
+import convertNetscapeBookmark from "@/utils/convert-chrome-bookmark";
+import readLocalFile from "@/utils/read-local-file";
 
 import styles from "./index.module.css";
 

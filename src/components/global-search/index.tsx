@@ -1,7 +1,7 @@
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 
-import useBookmarks from "@/app/hooks/use-bookmarks";
-import { Bookmark } from "@/app/types";
+import useBookmarks from "@/hooks/use-bookmarks";
+import { Bookmark } from "@/types";
 import Input from "@/ui/input";
 
 import ResultItem from "./components/result-item";

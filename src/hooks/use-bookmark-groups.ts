@@ -2,7 +2,8 @@ import { useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { useMemo } from "react";
 
-import { BookmarkGroup, BookmarkGroupForStore } from "../types";
+import { BookmarkGroup, BookmarkGroupForStore } from "@/types";
+
 import useBookmarks from "./use-bookmarks";
 
 export const DEFAULT_GROUP_NAME = "Ungrouped";
