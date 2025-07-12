@@ -1,0 +1,23 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@apply",
+      "references": [
+        {
+          "name": "Unocss Documentation",
+          "url": "https://unocss.dev/transformers/directives#apply"
+        }
+      ]
+    },
+    {
+      "name": "@unocss",
+      "references": [
+        {
+          "name": "Unocss Documentation",
+          "url": "https://unocss.dev/integrations/postcss#unocss"
+        }
+      ]
+    }
+  ]
+}
