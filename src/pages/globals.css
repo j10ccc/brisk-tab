@@ -9,6 +9,7 @@
 }
 
 body {
+  @apply text-[16px];
   @apply bg-brand-background text-gray-9;
 }
 
