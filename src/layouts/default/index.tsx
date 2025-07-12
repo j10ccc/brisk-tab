@@ -1,4 +1,4 @@
-import LayoutHeader from "@/components/layout-header";
+import LayoutHeader from "./components/layout-header";
 
 export default function DefaultLayout({
   children
