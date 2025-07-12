@@ -8,7 +8,7 @@ import ResultItem from "./components/result-item";
 import styles from "./index.module.css";
 
 const KEY_ACTION: Record<string, (event: KeyboardEvent) => boolean> = {
-  OPEN: (e) => e.key === "/" || e.key === "k",
+  OPEN: (e) => e.key === "/" || (e.key === "k" && e.metaKey),
   CLOSE: (e) => e.key === "Escape"
 };
 
