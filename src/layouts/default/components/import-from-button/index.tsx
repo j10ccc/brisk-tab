@@ -38,6 +38,7 @@ export default function ImportFromButton() {
         isOpen={isOpenImportWayModal}
         onClose={handleCloseAllModal}
         onImportFromFile={handleImportBookmarks}
+        onImportFromBrowser={handleImportBookmarks}
       />
       <AddToGroupModal
         isOpen={isOpenStorageWayModal}

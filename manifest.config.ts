@@ -9,7 +9,7 @@ const manifest: Readonly<chrome.runtime.ManifestV3> = {
   action: {
     default_title: "Jump to Brisk Tab"
   },
-  permissions: ["activeTab", "scripting"],
+  permissions: ["activeTab", "scripting", "bookmarks"],
   background: {
     service_worker: "background.mjs"
   }

@@ -7,6 +7,8 @@ import Select, { SelectOption } from "@/ui/select";
 import convertNetscapeBookmark from "@/utils/convert-chrome-bookmark";
 import readLocalFile from "@/utils/read-local-file";
 
+import { parseChromeBookmarkNodes } from "../../utils";
+
 interface SelectImportSourceModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -33,16 +35,25 @@ const SELECT_FILE_BUTTON_LABEL = "Select File";
 export default function SelectImportSourceModal({
   isOpen,
   onClose,
-  onImportFromFile
+  onImportFromFile,
+  onImportFromBrowser
 }: SelectImportSourceModalProps) {
   const [importSource, setImportSource] = useState<string>();
   const selectorField = useId();
 
-  const handleConfirmImport = () => {
-    console.log(importSource);
+  // TODO: is firefox compatible?
+  const handleParseRuntimeBookmarks = async () => {
+    if (process.env.CRX_BUILD !== "1") {
+      return;
+    }
+
+    const tree = await chrome.bookmarks.getTree();
+    const bookmarks = parseChromeBookmarkNodes(tree);
+    onImportFromBrowser?.(bookmarks);
   };
 
-  const handleParseChromeBookmark = async (
+  // TODO: is firefox compatible?
+  const handleParseChromeBookmarkFile = async (
     e: ChangeEvent<HTMLInputElement>
   ) => {
     const file = e.target.files?.[0];
@@ -72,12 +83,12 @@ export default function SelectImportSourceModal({
                 <input
                   type="file"
                   className="hidden"
-                  onChange={handleParseChromeBookmark}
+                  onChange={handleParseChromeBookmarkFile}
                 />
               </label>
             </Button>
           ) : (
-            <Button variant="primary" onClick={handleConfirmImport}>
+            <Button variant="primary" onClick={handleParseRuntimeBookmarks}>
               Confirm
             </Button>
           )}
