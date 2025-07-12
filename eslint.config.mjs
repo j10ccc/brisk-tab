@@ -8,7 +8,7 @@ export default zjutjh(
         printWidth: 80
       }
     },
-    ignores: [".next"]
+    ignores: [".next", "out"]
   },
   {
     plugins: {

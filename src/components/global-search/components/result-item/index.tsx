@@ -1,4 +1,4 @@
-import { Bookmark } from "@/app/types";
+import { Bookmark } from "@/types";
 
 import styles from "./index.module.css";
 

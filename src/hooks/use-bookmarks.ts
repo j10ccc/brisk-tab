@@ -2,7 +2,7 @@ import { useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { useMemo } from "react";
 
-import { Bookmark, UngroupedBookmark } from "../types";
+import { Bookmark, UngroupedBookmark } from "@/types";
 
 const bookmarkListAtom = atomWithStorage<Bookmark[]>("__btab-bookmarks", []);
 

@@ -5,6 +5,7 @@ import styles from "./index.module.css";
 export interface SelectOption {
   value: string;
   label: string;
+  isDisabled?: boolean;
 }
 
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
@@ -22,10 +23,12 @@ export default function Select(props: SelectProps) {
       (option) => option.value === otherProps.value
     );
 
-    if (!prevSelectedOption && options.at(0)) {
+    const firstAvailableOption = options.find((option) => !option.isDisabled);
+
+    if (!prevSelectedOption && firstAvailableOption) {
       otherProps.onChange?.({
         // @ts-expect-error custom event
-        target: { value: options.at(0)?.value ?? "" }
+        target: { value: firstAvailableOption.value }
       });
     }
   }, [options, otherProps.onChange]);
@@ -36,7 +39,11 @@ export default function Select(props: SelectProps) {
       <div className="relative">
         <select id={field} name={field} {...otherProps}>
           {options.map((option) => (
-            <option key={`${field}-${option.value}`} value={option.value}>
+            <option
+              key={`${field}-${option.value}`}
+              value={option.value}
+              disabled={option.isDisabled}
+            >
               {option.label}
             </option>
           ))}

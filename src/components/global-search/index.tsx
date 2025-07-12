@@ -1,14 +1,14 @@
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 
-import useBookmarks from "@/app/hooks/use-bookmarks";
-import { Bookmark } from "@/app/types";
+import useBookmarks from "@/hooks/use-bookmarks";
+import { Bookmark } from "@/types";
 import Input from "@/ui/input";
 
 import ResultItem from "./components/result-item";
 import styles from "./index.module.css";
 
 const KEY_ACTION: Record<string, (event: KeyboardEvent) => boolean> = {
-  OPEN: (e) => e.key === "/" || e.key === "k",
+  OPEN: (e) => e.key === "/" || (e.key === "k" && e.metaKey),
   CLOSE: (e) => e.key === "Escape"
 };
 

@@ -1,4 +1,4 @@
-import { Bookmark } from "@/app/types";
+import { Bookmark } from "@/types";
 
 import styles from "./index.module.css";
 
@@ -16,10 +16,15 @@ export default function BookmarkItemView(props: BookmarkItemProps) {
       ) : (
         <div className="i-fluent-earth-16-filled" />
       )}
-      <a href={url} className={styles.name}>
+      <a href={url} className={styles.name} draggable={false}>
         {name}
       </a>
-      <a href={url} className={styles.forward} target="_blank">
+      <a
+        href={url}
+        className={styles.forward}
+        target="_blank"
+        draggable={false}
+      >
         <div className="i-fluent-arrow-forward-16-filled" />
       </a>
     </li>

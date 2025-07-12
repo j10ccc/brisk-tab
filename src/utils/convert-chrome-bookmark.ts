@@ -1,4 +1,4 @@
-import { UngroupedBookmark } from "../types";
+import { UngroupedBookmark } from "@/types";
 
 /**
  * Converts a chrome bookmark to a bookmark flatly

@@ -1,4 +1,4 @@
-import { BookmarkGroup } from "@/app/types";
+import { BookmarkGroup } from "@/types";
 
 import BookmarkItemView from "../bookmark-item-view";
 
