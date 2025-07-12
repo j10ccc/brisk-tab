@@ -1,7 +1,17 @@
 import type { NextConfig } from "next";
+import { webpack } from "next/dist/compiled/webpack/webpack";
 
 const nextConfig: NextConfig = {
-  output: process.env.CRX_BUILD === "1" ? "export" : undefined
+  output: process.env.CRX_BUILD === "1" ? "export" : undefined,
+  webpack: (config) => {
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        "process.env.CRX_BUILD": JSON.stringify(process.env.CRX_BUILD)
+      })
+    );
+
+    return config;
+  }
 };
 
 export default nextConfig;
