@@ -5,6 +5,6 @@ export default defineConfig({
     background: "./chrome/index.ts"
   },
   format: "esm",
-  outDir: "./out",
+  outDir: process.env.CRX_DIST,
   clean: false
 });

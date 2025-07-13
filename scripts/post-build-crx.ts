@@ -1,12 +1,22 @@
 import fs from "fs";
 import { globSync } from "glob";
+import { exit } from "process";
+import { build } from "tsdown";
 
 import manifest from "../manifest.config";
 
+async function buildBackgroundScript() {
+  await build();
+}
+
 function transformNextOutFiles() {
+  if (!process.env.CRX_DIST) {
+    exit(1);
+  }
+
   console.info("[script] Start transform next out files...");
 
-  const files = globSync("out/**/*.html");
+  const files = globSync(`${process.env.CRX_DIST}/**/*.html`);
 
   files.forEach((file) => {
     const content = fs.readFileSync(file, "utf-8");
@@ -14,8 +24,8 @@ function transformNextOutFiles() {
     fs.writeFileSync(file, modifiedContent, "utf-8");
   });
 
-  const sourcePath = "out/_next";
-  const destinationPath = "out/next";
+  const sourcePath = `${process.env.CRX_DIST}/_next`;
+  const destinationPath = `${process.env.CRX_DIST}/next`;
 
   try {
     fs.renameSync(sourcePath, destinationPath);
@@ -29,20 +39,24 @@ function transformNextOutFiles() {
 }
 
 function writeManifest() {
-  const outputPath = "out/manifest.json";
+  if (!process.env.CRX_DIST) {
+    exit(1);
+  }
+
+  const outputPath = `${process.env.CRX_DIST}/manifest.json`;
   const manifestJson = JSON.stringify(manifest, null, 2);
 
   try {
-    fs.mkdirSync("out", { recursive: true });
+    fs.mkdirSync(process.env.CRX_DIST, { recursive: true });
     fs.writeFileSync(outputPath, manifestJson, "utf-8");
     console.info(
-      "[script] Manifest file written successfully to out/manifest.json"
+      `[script] Manifest file written successfully to ${outputPath}`
     );
   } catch (err) {
     console.error("[script] Failed to write manifest file:", err);
   }
 }
 
+await buildBackgroundScript();
 transformNextOutFiles();
-
 writeManifest();

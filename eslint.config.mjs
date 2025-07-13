@@ -8,7 +8,7 @@ export default zjutjh(
         printWidth: 80
       }
     },
-    ignores: [".next", "out"]
+    ignores: [".next", "out", "dist-crx"]
   },
   {
     plugins: {
