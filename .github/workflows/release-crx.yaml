@@ -1,0 +1,50 @@
+name: Release CRX
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build:crx
+
+      - name: Pack extension directory
+        uses: cardinalby/webext-buildtools-pack-extension-dir-action@v1
+        with:
+          extensionDir: 'dist-crx'
+          zipFilePath: 'build/brisk-tab-${{ github.ref_name }}.zip'
+      
+      - name: Build CRX
+        uses: cardinalby/webext-buildtools-chrome-crx-action@v2
+        with:
+          zipFilePath: 'build/brisk-tab-${{ github.ref_name }}.zip'
+          crxFilePath: 'build/brisk-tab-${{ github.ref_name }}.crx'
+          privateKey: ${{ secrets.CHROME_CRX_PRIVATE_KEY }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: build/*
+          generate_release_notes: true
