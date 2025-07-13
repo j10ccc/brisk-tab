@@ -46,7 +46,7 @@ jobs:
         uses: montudor/action-zip@v1
        
       - name: Zip CRX
-        run: zip -m brisk-tab-${{ github.ref_name }}.crx brisk-tab-${{ github.ref_name }}-crx.zip
+        run: zip -m brisk-tab-${{ github.ref_name }}-crx.zip brisk-tab-${{ github.ref_name }}.crx
         working-directory: build
 
       - name: Release
