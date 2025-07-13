@@ -53,7 +53,6 @@
     "simple-git-hooks": "catalog:infra",
     "tsdown": "catalog:infra",
     "typescript": "catalog:infra",
-    "unocss": "catalog:frontend",
-    "webext-buildtools-chrome-crx-builder": "^1.0.18"
+    "unocss": "catalog:frontend"
   }
 }
