@@ -1,7 +1,7 @@
 {
   "name": "brisk-tab",
   "author": "SummersDay",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "An alt blank page for your browser",
   "private": true,
   "packageManager": "pnpm@10.13.1",
@@ -53,6 +53,7 @@
     "simple-git-hooks": "catalog:infra",
     "tsdown": "catalog:infra",
     "typescript": "catalog:infra",
-    "unocss": "catalog:frontend"
+    "unocss": "catalog:frontend",
+    "webext-buildtools-chrome-crx-builder": "^1.0.18"
   }
 }
