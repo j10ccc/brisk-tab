@@ -41,12 +41,13 @@ jobs:
           zipFilePath: 'build/brisk-tab-${{ github.ref_name }}-dist.zip'
           crxFilePath: 'build/brisk-tab-${{ github.ref_name }}.crx'
           privateKey: ${{ secrets.CHROME_CRX_PRIVATE_KEY }}
-       
-      - name: Compress CRX
+          
+      - name: Install zip
         uses: montudor/action-zip@v1
-        with:
-          args: zip -m brisk-tab-${{ github.ref_name }}.crx brisk-tab-${{ github.ref_name }}-crx.zip
-          working-directory: build
+       
+      - name: Zip CRX
+        run: zip -m brisk-tab-${{ github.ref_name }}.crx brisk-tab-${{ github.ref_name }}-crx.zip
+        working-directory: build
 
       - name: Release
         uses: softprops/action-gh-release@v2
