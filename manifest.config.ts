@@ -6,6 +6,9 @@ const manifest: Readonly<chrome.runtime.ManifestV3> = {
   name,
   version,
   description,
+  chrome_url_overrides: {
+    newtab: "index.html"
+  },
   action: {
     default_title: "Jump to Brisk Tab"
   },
