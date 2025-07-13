@@ -10,7 +10,7 @@ const manifest: Readonly<chrome.runtime.ManifestV3> = {
     newtab: "index.html"
   },
   action: {
-    default_title: "Jump to Brisk Tab"
+    default_popup: "crx-popup.html"
   },
   permissions: ["activeTab", "scripting", "bookmarks"],
   background: {
