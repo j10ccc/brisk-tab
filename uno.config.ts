@@ -21,7 +21,8 @@ export default defineConfig({
       brand: {
         primary: "#617d71",
         secondary: "#f1f5f4",
-        background: "#f9fafa"
+        background: "#f9fafa",
+        error: "#9d2e13"
       }
     }
   },

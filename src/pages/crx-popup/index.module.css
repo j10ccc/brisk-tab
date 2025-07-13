@@ -1,0 +1,19 @@
+.header {
+  @apply flex items-baseline mb-2;
+
+  .title {
+    @apply text-lg op-80;
+
+    .icon {
+      @apply i-fluent-bookmark-multiple-16-regular;
+      @apply inline-block mr-1 text-lg;
+    }
+  }
+
+  .operations {
+    .open {
+      @apply i-fluent-open-20-regular;
+      @apply text-brand-primary cursor-pointer text-lg;
+    }
+  }
+}
