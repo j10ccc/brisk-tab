@@ -1,0 +1,4 @@
+.container {
+  @apply text-14px text-gray-6;
+  @apply px-4 pt-1 pb-2 border-t-dashed border-gray-300 border-t-1;
+}

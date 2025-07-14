@@ -4,8 +4,10 @@ import useBookmarks from "@/hooks/use-bookmarks";
 import { useGlobalSearch } from "@/hooks/use-global-search";
 import { Bookmark } from "@/types";
 import Input from "@/ui/input";
+import { isStringEmpty } from "@/utils/string";
 
 import ResultItem from "./components/result-item";
+import SearchFooter from "./components/search-footer";
 import styles from "./index.module.css";
 
 const KEY_ACTION: Record<string, (event: KeyboardEvent) => boolean> = {
@@ -42,7 +44,7 @@ export default function GlobalSearch() {
   }, [setIsShowSearch]);
 
   const results = useMemo<Bookmark[]>(() => {
-    if (!keyword) {
+    if (isStringEmpty(keyword)) {
       return [];
     }
 
@@ -90,7 +92,7 @@ export default function GlobalSearch() {
             onChange={(e) => setKeyword(e.target.value)}
           />
         </div>
-        <div className="px-lg flex-auto overflow-auto">
+        <div className={styles.list}>
           {deferredResults.map((bookmark) => (
             <ResultItem
               key={`${bookmark.groupId}-${bookmark.url}`}
@@ -98,6 +100,7 @@ export default function GlobalSearch() {
             />
           ))}
         </div>
+        <SearchFooter resultTotal={results.length} keyword={keyword} />
       </div>
     </div>
   );
