@@ -4,6 +4,7 @@ import useBookmarks from "@/hooks/use-bookmarks";
 import { useGlobalSearch } from "@/hooks/use-global-search";
 import { Bookmark } from "@/types";
 import Input from "@/ui/input";
+import { isStringEmpty } from "@/utils/string";
 
 import ResultItem from "./components/result-item";
 import styles from "./index.module.css";
@@ -42,7 +43,7 @@ export default function GlobalSearch() {
   }, [setIsShowSearch]);
 
   const results = useMemo<Bookmark[]>(() => {
-    if (!keyword) {
+    if (isStringEmpty(keyword)) {
       return [];
     }
 
