@@ -7,6 +7,7 @@ import Input from "@/ui/input";
 import { isStringEmpty } from "@/utils/string";
 
 import ResultItem from "./components/result-item";
+import SearchFooter from "./components/search-footer";
 import styles from "./index.module.css";
 
 const KEY_ACTION: Record<string, (event: KeyboardEvent) => boolean> = {
@@ -99,6 +100,7 @@ export default function GlobalSearch() {
             />
           ))}
         </div>
+        <SearchFooter resultTotal={results.length} keyword={keyword} />
       </div>
     </div>
   );
