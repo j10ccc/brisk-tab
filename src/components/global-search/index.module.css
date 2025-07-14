@@ -10,12 +10,20 @@
 
 .content {
   @apply mx-auto mt-10 max-h-4/5 flex flex-col;
-  @apply relative py-lg shadow-sm rounded-md w-180 max-w-[80%];
+  @apply relative pt-lg shadow-sm rounded-md w-180 max-w-[80%];
   @apply bg-brand-background;
 }
 
 .search {
-  @apply p-xs text-16px border-brand-primary border-2 rounded-md;
+  @apply p-xs text-16px border-brand-primary border-2 rounded-md mb-2;
   @apply hover:bg-transparent hover:ring-brand-primary/30;
   @apply focus:ring-3 focus:ring-brand-primary/30;
+}
+
+.list {
+  @apply px-lg flex-auto overflow-auto;
+
+  > :last-child {
+    @apply mb-4;
+  }
 }

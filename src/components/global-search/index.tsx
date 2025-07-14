@@ -91,7 +91,7 @@ export default function GlobalSearch() {
             onChange={(e) => setKeyword(e.target.value)}
           />
         </div>
-        <div className="px-lg flex-auto overflow-auto">
+        <div className={styles.list}>
           {deferredResults.map((bookmark) => (
             <ResultItem
               key={`${bookmark.groupId}-${bookmark.url}`}
