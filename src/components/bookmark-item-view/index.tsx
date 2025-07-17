@@ -1,5 +1,6 @@
 import clsx from "clsx";
 
+import { useEditBookmarkModal } from "@/hooks/use-edit-bookmark-modal";
 import { useEditingMode } from "@/hooks/use-editing-mode";
 import { Bookmark } from "@/types";
 
@@ -12,11 +13,22 @@ type BookmarkItemProps = {
 export default function BookmarkItemView(props: BookmarkItemProps) {
   const { name, url, favicon } = props.bookmark;
   const { isOpen: isEditingModeOpen } = useEditingMode();
+  const { openEditBookmarkModal } = useEditBookmarkModal();
 
   const isNavigateDisabled = isEditingModeOpen;
 
+  const handleClick = () => {
+    if (!isNavigateDisabled) {
+      return;
+    }
+    openEditBookmarkModal(props.bookmark);
+  };
+
   return (
-    <li className={clsx(styles.container, isEditingModeOpen && styles.editing)}>
+    <li
+      className={clsx(styles.container, isEditingModeOpen && styles.editing)}
+      onClick={handleClick}
+    >
       {favicon ? (
         <img src={favicon} alt={name} className={styles.favicon} />
       ) : (
@@ -24,7 +36,7 @@ export default function BookmarkItemView(props: BookmarkItemProps) {
       )}
       {isEditingModeOpen ? (
         <div className={styles.editingIcon}>
-          <div className="i-fluent-note-edit-20-filled" />
+          <div className="i-fluent-note-edit-20-regular" />
         </div>
       ) : null}
       <a

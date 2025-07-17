@@ -2,17 +2,21 @@ import Head from "next/head";
 import { ReactElement, useMemo } from "react";
 
 import BookmarkGroupView from "@/components/bookmark-group-view";
+import EditBookmarkModal from "@/components/edit-bookmark-modal";
 import EmptyPlaceholder from "@/components/empty-placeholder";
 import GlobalSearch from "@/components/global-search";
 import useBookmarkGroups from "@/hooks/use-bookmark-groups";
 import useBookmarks from "@/hooks/use-bookmarks";
+import { useEditBookmarkModal } from "@/hooks/use-edit-bookmark-modal";
 import DefaultLayout from "@/layouts/default";
 
 import { NextPageWithLayout } from "./_app";
 
 const HomePage: NextPageWithLayout = () => {
-  const { bookmarks } = useBookmarks();
+  const { bookmarks, updateBookmarks } = useBookmarks();
   const { groups } = useBookmarkGroups();
+  const { isOpenBookmarkModal, toEditBookmark, closeEditBookmarkModal } =
+    useEditBookmarkModal();
 
   const contentfulGroups = useMemo(() => {
     return groups.filter((group) => group.bookmarks.length > 0);
@@ -31,6 +35,18 @@ const HomePage: NextPageWithLayout = () => {
         ))
       )}
       <GlobalSearch />
+      <EditBookmarkModal
+        key={`${toEditBookmark?.groupId}-${toEditBookmark?.url}`}
+        isOpen={isOpenBookmarkModal}
+        onClose={closeEditBookmarkModal}
+        onConfirm={(newBookmark) => {
+          if (toEditBookmark) {
+            updateBookmarks(newBookmark, toEditBookmark);
+          }
+          closeEditBookmarkModal();
+        }}
+        bookmark={toEditBookmark}
+      />
     </section>
   );
 };
