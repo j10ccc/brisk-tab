@@ -13,7 +13,7 @@ import DefaultLayout from "@/layouts/default";
 import { NextPageWithLayout } from "./_app";
 
 const HomePage: NextPageWithLayout = () => {
-  const { bookmarks, updateBookmarks } = useBookmarks();
+  const { bookmarks, updateBookmarks, removeBookmarks } = useBookmarks();
   const { groups } = useBookmarkGroups();
   const { isOpenBookmarkModal, toEditBookmark, closeEditBookmarkModal } =
     useEditBookmarkModal();
@@ -39,9 +39,15 @@ const HomePage: NextPageWithLayout = () => {
         key={`${toEditBookmark?.groupId}-${toEditBookmark?.url}`}
         isOpen={isOpenBookmarkModal}
         onClose={closeEditBookmarkModal}
-        onConfirm={(newBookmark) => {
+        onUpdate={(newBookmark) => {
           if (toEditBookmark) {
             updateBookmarks(newBookmark, toEditBookmark);
+          }
+          closeEditBookmarkModal();
+        }}
+        onRemove={() => {
+          if (toEditBookmark) {
+            removeBookmarks(toEditBookmark);
           }
           closeEditBookmarkModal();
         }}

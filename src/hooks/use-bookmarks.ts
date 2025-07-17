@@ -61,10 +61,28 @@ export default function useBookmarks() {
     [setBookmarks, bookmarks]
   );
 
+  const removeBookmarks = useCallback(
+    (oldBookmark: Bookmark) => {
+      const list = bookmarks.slice();
+      const oldIndex = list.findIndex(
+        (item) =>
+          item.groupId === oldBookmark.groupId && item.url === oldBookmark.url
+      );
+
+      if (oldIndex !== -1) {
+        list.splice(oldIndex, 1);
+      }
+
+      setBookmarks(list);
+    },
+    [setBookmarks, bookmarks]
+  );
+
   return {
     bookmarks,
     groupIdMap,
     addBookmarks,
-    updateBookmarks
+    updateBookmarks,
+    removeBookmarks
   };
 }
