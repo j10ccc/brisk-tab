@@ -10,11 +10,11 @@ export interface InputProps
 }
 
 export default function Input(props: InputProps) {
-  const { ref, label, field, ...otherProps } = props;
+  const { ref, label, field, onKeyDown, ...otherProps } = props;
 
   const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     e.stopPropagation();
-    props.onKeyDown?.(e);
+    onKeyDown?.(e);
   };
 
   return (
@@ -25,8 +25,8 @@ export default function Input(props: InputProps) {
         id={field}
         name={field}
         type="text"
-        {...otherProps}
         onKeyDown={handleKeyDown}
+        {...otherProps}
       />
     </div>
   );
