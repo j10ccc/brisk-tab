@@ -5,7 +5,6 @@ import { UngroupedBookmark } from "@/types";
 
 import AddToGroupModal from "../add-to-group-modal";
 import SelectImportSourceModal from "../select-import-source-modal";
-import styles from "./index.module.css";
 
 export default function ImportFromButton() {
   const [isOpenImportWayModal, setIsOpenImportWayModal] = useState(false);
@@ -28,10 +27,7 @@ export default function ImportFromButton() {
 
   return (
     <>
-      <div
-        className={styles["import-from"]}
-        onClick={() => setIsOpenImportWayModal(true)}
-      >
+      <div className="brand-btn" onClick={() => setIsOpenImportWayModal(true)}>
         <div className="i-fluent-document-arrow-up-20-regular" />
       </div>
       <SelectImportSourceModal

@@ -1,36 +1,29 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-import useBookmarkGroups from "@/hooks/use-bookmark-groups";
+import EditBookmarkForm, {
+  EditBookmarkFormRef
+} from "@/components/edit-bookmark-form";
 import useBookmarks from "@/hooks/use-bookmarks";
+import { UngroupedBookmark } from "@/types";
 import Button from "@/ui/button";
-import Input from "@/ui/input";
-import Select from "@/ui/select";
 
 import styles from "./index.module.css";
 
 function CrxPopup() {
-  const [name, setName] = useState("");
-  const [url, setUrl] = useState("");
   const { addBookmarks } = useBookmarks();
-  const { groups } = useBookmarkGroups();
-  // TODO: default use recent used group
-  const [group, setGroup] = useState(groups[0]);
   const [errTip, setErrTip] = useState("");
   const [successTip, setSuccessTip] = useState("");
+  const [tabBookmark, setTabBookmark] = useState<UngroupedBookmark>();
+  const formRef = useRef<EditBookmarkFormRef>(null);
 
   useEffect(() => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      setName(tabs[0].title || "");
-      setUrl(tabs[0].url || "");
+      setTabBookmark({
+        name: tabs[0].title || "",
+        url: tabs[0].url || ""
+      });
     });
   }, []);
-
-  useEffect(() => {
-    // eslint-disable-next-line @eslint-react/hooks-extra/no-direct-set-state-in-use-effect
-    setSuccessTip("");
-    // eslint-disable-next-line @eslint-react/hooks-extra/no-direct-set-state-in-use-effect
-    setErrTip("");
-  }, [name, url, group]);
 
   const handleOpenMainTab = () => {
     chrome.tabs.create({
@@ -38,16 +31,20 @@ function CrxPopup() {
     });
   };
 
-  const handleSelectGroup = (ev: ChangeEvent<HTMLSelectElement>) => {
-    const id = ev.target.value;
-    const target = groups.find((item) => item.id === id);
-    if (target) {
-      setGroup(target);
-    }
-  };
-
   const handleAddBookmark = () => {
-    const count = addBookmarks([{ name, url }], group.id);
+    const err = formRef.current?.validate();
+    if (err) {
+      setErrTip(err);
+      return;
+    }
+
+    const formData = formRef.current?.getFormData();
+
+    if (!formData) {
+      return;
+    }
+
+    const count = addBookmarks([formData], formData.groupId);
     if (count > 0) {
       setSuccessTip("Bookmark added.");
       setErrTip("");
@@ -69,29 +66,10 @@ function CrxPopup() {
           <div className={styles.open} onClick={handleOpenMainTab} />
         </div>
       </div>
-      <Input
-        field="name"
-        label="Bookmark name"
-        placeholder="A cool website"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <Input
-        field="url"
-        label="Bookmark URL"
-        placeholder="http://example.com"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      />
-      <Select
-        field="group"
-        label="Select a group"
-        options={groups.map((item) => ({
-          label: item.name,
-          value: item.id
-        }))}
-        value={group.id}
-        onChange={handleSelectGroup}
+      <EditBookmarkForm
+        key={tabBookmark?.url ?? ""}
+        bookmark={tabBookmark}
+        ref={formRef}
       />
       <div className="flex justify-end items-baseline">
         <div className="text-sm">

@@ -1,6 +1,6 @@
 import { useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { uniqueBy } from "remeda";
 
 import { Bookmark, UngroupedBookmark } from "@/types";
@@ -23,30 +23,80 @@ export default function useBookmarks() {
     [bookmarks]
   );
 
-  const addBookmarks = (
-    newList: UngroupedBookmark[],
-    groupId: string
-  ): number => {
-    const originalLength = bookmarks.length;
+  const addBookmarks = useCallback(
+    (newList: UngroupedBookmark[], groupId: string): number => {
+      const originalLength = bookmarks.length;
 
-    const grouped: Bookmark[] = newList.map((item) => ({
-      ...item,
-      groupId
-    }));
+      const grouped: Bookmark[] = newList.map((item) => ({
+        ...item,
+        groupId
+      }));
 
-    const uniqueList = uniqueBy(
-      bookmarks.concat(grouped),
-      (item) => `${item.groupId}-${item.url}`
-    );
+      const uniqueList = uniqueBy(
+        bookmarks.concat(grouped),
+        (item) => `${item.groupId}-${item.url}`
+      );
 
-    setBookmarks(uniqueList);
+      setBookmarks(uniqueList);
 
-    return uniqueList.length - originalLength;
-  };
+      return uniqueList.length - originalLength;
+    },
+    [bookmarks, setBookmarks]
+  );
+
+  const updateBookmarks = useCallback(
+    (newBookmark: Bookmark, oldBookmark: Bookmark) => {
+      const list = bookmarks.slice();
+      if (
+        newBookmark.groupId !== oldBookmark.groupId ||
+        newBookmark.url !== oldBookmark.url
+      ) {
+        const sameAnother = list.find(
+          (item) =>
+            item.groupId === newBookmark.groupId && item.url === newBookmark.url
+        );
+
+        if (sameAnother) {
+          throw new Error("Same bookmark exists in the group.");
+        }
+      }
+
+      const oldIndex = list.findIndex(
+        (item) =>
+          item.groupId === oldBookmark.groupId && item.url === oldBookmark.url
+      );
+
+      if (oldIndex !== -1) {
+        list.splice(oldIndex, 1, newBookmark);
+      }
+
+      setBookmarks(list);
+    },
+    [setBookmarks, bookmarks]
+  );
+
+  const removeBookmarks = useCallback(
+    (oldBookmark: Bookmark) => {
+      const list = bookmarks.slice();
+      const oldIndex = list.findIndex(
+        (item) =>
+          item.groupId === oldBookmark.groupId && item.url === oldBookmark.url
+      );
+
+      if (oldIndex !== -1) {
+        list.splice(oldIndex, 1);
+      }
+
+      setBookmarks(list);
+    },
+    [setBookmarks, bookmarks]
+  );
 
   return {
     bookmarks,
     groupIdMap,
-    addBookmarks
+    addBookmarks,
+    updateBookmarks,
+    removeBookmarks
   };
 }

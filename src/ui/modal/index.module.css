@@ -16,11 +16,7 @@
 }
 
 .header {
-  @apply flex justify-between items-end;
-
-  h1 {
-    @apply mb-2;
-  }
+  @apply flex justify-between items-end mb-2;
 }
 
 .body {

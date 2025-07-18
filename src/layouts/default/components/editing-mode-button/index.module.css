@@ -1,0 +1,9 @@
+.container {
+  @apply brand-btn;
+  @apply flex items-center gap-1;
+
+  &.active {
+    @apply text-brand-primary bg-brand-secondary;
+    @apply ring-brand-primary ring-1 ring-inset;
+  }
+}
