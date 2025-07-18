@@ -27,11 +27,6 @@ export default function GlobalSearch() {
       if (KEY_ACTION.OPEN(event)) {
         setIsShowSearch(true);
       } else if (KEY_ACTION.CLOSE(event)) {
-        if (document.activeElement === searchInputRef.current) {
-          searchInputRef.current?.blur();
-          return;
-        }
-
         setIsShowSearch(false);
       }
     };
@@ -90,6 +85,11 @@ export default function GlobalSearch() {
             ref={searchInputRef}
             className={styles.search}
             onChange={(e) => setKeyword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                searchInputRef.current?.blur();
+              }
+            }}
           />
         </div>
         <div className={styles.list}>
