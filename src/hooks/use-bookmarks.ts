@@ -47,13 +47,18 @@ export default function useBookmarks() {
   const updateBookmarks = useCallback(
     (newBookmark: Bookmark, oldBookmark: Bookmark) => {
       const list = bookmarks.slice();
-      const existing = list.find(
-        (item) =>
-          item.groupId === newBookmark.groupId && item.url === newBookmark.url
-      );
+      if (
+        newBookmark.groupId !== oldBookmark.groupId ||
+        newBookmark.url !== oldBookmark.url
+      ) {
+        const sameAnother = list.find(
+          (item) =>
+            item.groupId === newBookmark.groupId && item.url === newBookmark.url
+        );
 
-      if (existing) {
-        throw new Error("Same bookmark exists in the group");
+        if (sameAnother) {
+          throw new Error("Same bookmark exists in the group.");
+        }
       }
 
       const oldIndex = list.findIndex(
