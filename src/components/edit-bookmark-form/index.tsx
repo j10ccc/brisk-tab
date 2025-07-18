@@ -1,4 +1,5 @@
-import { ChangeEvent, useImperativeHandle, useState } from "react";
+import { ChangeEvent, useCallback, useImperativeHandle, useState } from "react";
+import z4 from "zod/v4";
 
 import useBookmarkGroups from "@/hooks/use-bookmark-groups";
 import { Bookmark } from "@/types";
@@ -7,12 +8,23 @@ import Select from "@/ui/select";
 
 export interface EditBookmarkFormRef {
   getFormData: () => Bookmark;
+  validate: () => string | undefined;
 }
 
 interface EditBookmarkFormProps {
   bookmark?: Bookmark;
   ref: React.Ref<EditBookmarkFormRef>;
 }
+
+const formDataSchema = z4.object({
+  name: z4.string().trim().nonempty({ error: "Bookmark name is required" }),
+  url: z4.url({
+    protocol: /^https?$/,
+    hostname: z4.regexes.domain,
+    error: "Bookmark URL is invalid"
+  }),
+  groupId: z4.string().nonempty({ error: "Bookmark group is required" })
+});
 
 export default function EditBookmarkForm({
   bookmark,
@@ -32,13 +44,33 @@ export default function EditBookmarkForm({
     }
   };
 
-  useImperativeHandle(ref, () => ({
-    getFormData: () => ({
+  const handleGetFormData = useCallback(() => {
+    return {
       name,
       url,
       groupId
-    })
-  }));
+    };
+  }, [name, url, groupId]);
+
+  const handleValidate = useCallback(() => {
+    const result = formDataSchema.safeParse({
+      name,
+      url,
+      groupId
+    });
+    if (!result.success) {
+      return result.error.issues.at(0)?.message;
+    }
+  }, [name, url, groupId]);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      getFormData: handleGetFormData,
+      validate: handleValidate
+    }),
+    [handleGetFormData, handleValidate]
+  );
 
   return (
     <>

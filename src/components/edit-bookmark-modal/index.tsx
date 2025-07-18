@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { Bookmark } from "@/types";
 import Button from "@/ui/button";
@@ -22,16 +22,27 @@ export default function EditBookmarkModal({
   onRemove
 }: EditBookmarkModalProps) {
   const formRef = useRef<EditBookmarkFormRef>(null);
+  const [error, setError] = useState("");
 
   const handleConfirm = () => {
-    if (!bookmark) {
+    if (!bookmark || !formRef.current) {
       return;
     }
-    if (!formRef.current) {
+
+    const err = formRef.current.validate();
+    if (err) {
+      setError(err);
       return;
     }
+
     const newBookmark = formRef.current.getFormData();
-    onUpdate(newBookmark);
+    try {
+      onUpdate(newBookmark);
+    } catch (e) {
+      if (e instanceof Error) {
+        setError(e.message);
+      }
+    }
   };
 
   const handleRemove = () => {
@@ -51,12 +62,21 @@ export default function EditBookmarkModal({
           className="flex items-center gap-1 text-brand-error cursor-pointer"
           onClick={handleRemove}
         >
-          <div className="i-fluent-delete-24-regular" />
+          <i className="i-fluent-delete-24-regular" />
           <span className="text-[14px]">Delete</span>
         </div>
       }
       operation={
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center flex-auto">
+          {error ? (
+            <span
+              className="text-brand-error text-[14px] line-clamp-1"
+              title={error}
+            >
+              {error}
+            </span>
+          ) : null}
+          <div className="flex-auto" />
           <Button onClick={onClose}>Cancel</Button>
           <Button variant="primary" onClick={handleConfirm}>
             Save

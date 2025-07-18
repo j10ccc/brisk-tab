@@ -25,7 +25,8 @@
     "next": "catalog:frontend",
     "react": "catalog:frontend",
     "react-dom": "catalog:frontend",
-    "remeda": "catalog:frontend"
+    "remeda": "catalog:frontend",
+    "zod": "^4.0.5"
   },
   "devDependencies": {
     "@eslint-react/eslint-plugin": "catalog:lint",

@@ -137,6 +137,9 @@ importers:
       remeda:
         specifier: catalog:frontend
         version: 2.25.0
+      zod:
+        specifier: ^4.0.5
+        version: 4.0.5
     devDependencies:
       '@eslint-react/eslint-plugin':
         specifier: catalog:lint
