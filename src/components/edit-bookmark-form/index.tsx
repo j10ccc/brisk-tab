@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback, useImperativeHandle, useState } from "react";
 import z4 from "zod/v4";
 
 import useBookmarkGroups from "@/hooks/use-bookmark-groups";
-import { Bookmark } from "@/types";
+import { Bookmark, UngroupedBookmark } from "@/types";
 import Input from "@/ui/input";
 import Select from "@/ui/select";
 
@@ -12,18 +12,18 @@ export interface EditBookmarkFormRef {
 }
 
 interface EditBookmarkFormProps {
-  bookmark?: Bookmark;
+  bookmark?: Bookmark | UngroupedBookmark;
   ref: React.Ref<EditBookmarkFormRef>;
 }
 
 const formDataSchema = z4.object({
-  name: z4.string().trim().nonempty({ error: "Bookmark name is required" }),
+  name: z4.string().trim().nonempty({ error: "Bookmark name is required." }),
   url: z4.url({
     protocol: /^https?$/,
     hostname: z4.regexes.domain,
-    error: "Bookmark URL is invalid"
+    error: "Bookmark URL is invalid."
   }),
-  groupId: z4.string().nonempty({ error: "Bookmark group is required" })
+  groupId: z4.string().nonempty({ error: "Bookmark group is required." })
 });
 
 export default function EditBookmarkForm({
@@ -34,7 +34,9 @@ export default function EditBookmarkForm({
   const [url, setUrl] = useState(bookmark?.url ?? "");
   const { groups } = useBookmarkGroups();
   // TODO: default use recent used group
-  const [groupId, setGroupId] = useState(bookmark?.groupId ?? groups[0].id);
+  const [groupId, setGroupId] = useState(
+    (bookmark as Bookmark | undefined)?.groupId ?? groups[0].id
+  );
 
   const handleSelectGroup = (ev: ChangeEvent<HTMLSelectElement>) => {
     const id = ev.target.value;
@@ -46,8 +48,8 @@ export default function EditBookmarkForm({
 
   const handleGetFormData = useCallback(() => {
     return {
-      name,
-      url,
+      name: name.trim(),
+      url: url.trim(),
       groupId
     };
   }, [name, url, groupId]);
